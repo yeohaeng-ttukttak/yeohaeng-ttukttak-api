@@ -29,7 +29,7 @@ public class PlaceDTO {
         this.id = place.getId();
         this.name = place.getName();
         this.type = place.getType();
-        this.location = new LocationDTO(new Location(place.getPoint()));
+        this.location = new LocationDTO(place.getLocation());
         this.images = place.getFiles().stream().map(ImageDTO::new).toList();
     }
 

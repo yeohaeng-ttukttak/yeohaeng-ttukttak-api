@@ -5,23 +5,32 @@ import com.yeohangttukttak.api.global.config.validator.ValidLatitude;
 import com.yeohangttukttak.api.global.config.validator.ValidLongitude;
 import lombok.Data;
 
+import java.text.DecimalFormat;
+
 @Data
 public class LocationDTO {
 
     @ValidLatitude
-    private double latitude;
+    private Double latitude;
 
     @ValidLongitude
-    private double longitude;
+    private Double longitude;
+
+    private Double distance;
 
     public LocationDTO (Location location) {
-        this.latitude = location.getLatitude();
+        this.latitude = location.getLatitude() ;
         this.longitude = location.getLongitude();
     }
 
     public LocationDTO (Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public void setDistance(Double distance) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.distance = Double.parseDouble(df.format(distance * 100));
     }
 
 }

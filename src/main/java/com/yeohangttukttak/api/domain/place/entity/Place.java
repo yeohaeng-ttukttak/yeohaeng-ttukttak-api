@@ -8,8 +8,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.SQLRestriction;
-import org.locationtech.jts.geom.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,8 @@ public class Place extends BaseEntity implements Attachable {
     @Enumerated(EnumType.STRING)
     private PlaceType type;
 
-    private Point point;
+    @Embedded
+    private Location location;
 
     @OneToMany(mappedBy = "place")
     private List<Visit> visits = new ArrayList<>();
@@ -45,7 +44,7 @@ public class Place extends BaseEntity implements Attachable {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.point = location.getPoint();
+        this.location = location;
     }
 
 }
